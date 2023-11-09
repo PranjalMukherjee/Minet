@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Graphik';
+    src: url('../public/font/Graphik-Regular-Trial.otf');
+}
+@font-face {
+    font-family: 'GraphikMedium';
+    src: url('../public/font/GraphikMedium.otf');
+}
+@font-face {
+    font-family: 'Graphik-Semibold';
+    src: url('../public/font/GraphikSemibold.otf')
+  }
+* {
+    font-family: 'Graphik', sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}

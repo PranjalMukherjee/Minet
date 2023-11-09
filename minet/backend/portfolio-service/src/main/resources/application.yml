@@ -1,0 +1,27 @@
+server:
+  port: 9004
+
+spring:
+  application:
+    name: PORTFOLIO-SERVICE
+  datasource:
+    url: jdbc:mysql://18.222.184.161:30001/minet1
+    username: root
+    password: Bootcamp@118!
+    hikari:
+      maximum-pool-size: 10
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  flyway:
+     validate-on-migrate: false
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost

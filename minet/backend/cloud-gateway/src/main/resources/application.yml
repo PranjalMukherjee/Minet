@@ -1,0 +1,52 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API_GATEWAY
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          "[/**]":
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/users/**
+          filters:
+            - AuthenticationFilter
+        - id: CRYPTO-SERVICE
+          uri: lb://CRYPTO-SERVICE
+          predicates:
+            - Path=/api/v1/crypto/**
+          filters:
+            - AuthenticationFilter
+        - id: PORTFOLIO-SERVICE
+          uri: lb://PORTFOLIO-SERVICE
+          predicates:
+            - Path=/api/v1/portfolio/**
+          filters:
+            - AuthenticationFilter
+        - id: WALLET-SERVICE
+          uri: lb://WALLET-SERVICE
+          predicates:
+            - Path=/api/v1/wallet/**
+          filters:
+            - AuthenticationFilter
+
+  config:
+    import: optional:classpath:.env[.properties]
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
